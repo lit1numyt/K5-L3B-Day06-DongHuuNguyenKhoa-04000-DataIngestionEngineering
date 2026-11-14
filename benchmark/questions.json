@@ -1,0 +1,222 @@
+[
+  {
+    "id": "q01",
+    "split": "dev",
+    "type": "direct",
+    "question": "Why is automatic software vulnerability identification important according to the paper?",
+    "expected_answer": "It can evaluate large codebases more efficiently than manual code auditing.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 1,
+    "evidence_quote": "it can evaluate large codebases more efficiently than manual code auditing",
+    "filter": null
+  },
+  {
+    "id": "q02",
+    "split": "dev",
+    "type": "direct",
+    "question": "What research gap does this survey aim to address?",
+    "expected_answer": "The lack of a comprehensive survey that summarizes, classifies, and analyzes ML/DL applications to vulnerability detection.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 1,
+    "evidence_quote": "a survey that summarises, classifies, and analyses the application of ML/DL models",
+    "filter": null
+  },
+  {
+    "id": "q03",
+    "split": "dev",
+    "type": "direct",
+    "question": "How many articles did the authors analyze, across how many venues and what time period?",
+    "expected_answer": "67 articles from 37 flagship software-engineering journals and conferences, published from 2011 to 2022.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 2,
+    "evidence_quote": "We analyzed 67 articles published in 37 flagship SE journals and conferences from 2011 to 2022.",
+    "filter": null
+  },
+  {
+    "id": "q04",
+    "split": "dev",
+    "type": "direct",
+    "question": "What are the three main stages of software vulnerability management described in the background section?",
+    "expected_answer": "Vulnerability detection, vulnerability analysis, and vulnerability remediation.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 4,
+    "evidence_quote": "There are multiple steps in software vulnerability management including",
+    "filter": null
+  },
+  {
+    "id": "q05",
+    "split": "dev",
+    "type": "metadata_filter",
+    "question": "Within the background-and-related-work section, how does vulnerability detection differ from vulnerability assessment and prioritization?",
+    "expected_answer": "Detection identifies potential vulnerabilities regardless of severity; assessment evaluates severity and impact; prioritization ranks vulnerabilities by risk or criticality.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 7,
+    "evidence_quote": "The goal of vulnerability detection is to identify all vulnerabilities that exist within the system, regardless of their severity.",
+    "filter": {"section": "background-and-related-work"}
+  },
+  {
+    "id": "q06",
+    "split": "dev",
+    "type": "paraphrase",
+    "question": "What sequence of activities does the paper describe for using ML/DL to detect software vulnerabilities?",
+    "expected_answer": "Collect data, represent and embed it, select and design a model, train it, then evaluate and validate it.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 2,
+    "evidence_quote": "The overall process to leverage ML/DL models for software vulnerability detection is as follows:",
+    "filter": null
+  },
+  {
+    "id": "q07",
+    "split": "dev",
+    "type": "direct",
+    "question": "How many papers remained after each stage of the paper-selection process?",
+    "expected_answer": "3,154 initially, 880 after the first screening, 116 after abstract review, and 67 after full-paper review.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 10,
+    "evidence_quote": "we began with a total of 3,154 papers obtained from the database search",
+    "filter": null
+  },
+  {
+    "id": "q08",
+    "split": "dev",
+    "type": "metadata_filter",
+    "question": "In the methodology section, how did the authors verify the taxonomy and resolve disagreements?",
+    "expected_answer": "Two other authors randomly checked 20 papers; the initial 30% disagreement rate was eliminated after a second review and cross-check.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 11,
+    "evidence_quote": "randomly select 20 papers from the workflow and check the created taxonomies for any discrepancies",
+    "filter": {"section": "methodology"}
+  },
+  {
+    "id": "q09",
+    "split": "dev",
+    "type": "comparative",
+    "question": "What publication trend does the paper report for 2011–2022, and which year had the highest count?",
+    "expected_answer": "Publications rose substantially, reaching 18 in 2021; there was only one publication in each year from 2011 to 2016.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 11,
+    "evidence_quote": "the number of publications increased to 18 in 2021",
+    "filter": null
+  },
+  {
+    "id": "q10",
+    "split": "dev",
+    "type": "direct",
+    "question": "How were the 67 primary studies divided between conferences/symposia and journals?",
+    "expected_answer": "43 conference or symposium papers and 24 journal papers; 64.1% versus 35.8%.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 12,
+    "evidence_quote": "43 conference and symposium papers along with 24 journal papers",
+    "filter": null
+  },
+  {
+    "id": "q11",
+    "split": "dev",
+    "type": "metadata_filter",
+    "question": "What three dataset-source categories did the survey identify, and what percentage of studies used each?",
+    "expected_answer": "Benchmark 65.7%, Collected 25.4%, and Hybrid 9%.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 15,
+    "evidence_quote": "65.7% of primary studies have utilized Benchmark datasets for software vulnerability detection",
+    "filter": {"section": "results-rq2"}
+  },
+  {
+    "id": "q12",
+    "split": "dev",
+    "type": "direct",
+    "question": "Which benchmark sources were most widely used, and how many studies used each?",
+    "expected_answer": "SARD was used by 17 studies and NVD by 13 studies.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 15,
+    "evidence_quote": "NVD and SARD is the most widely used source of data in the Benchmark category",
+    "filter": null
+  },
+  {
+    "id": "q13",
+    "split": "dev",
+    "type": "direct",
+    "question": "What was the most common dataset type in the survey, and what percentage of studies used it?",
+    "expected_answer": "Code-based data was most common, accounting for 70.1% of studies; source code was the dominant subtype.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 17,
+    "evidence_quote": "the majority of primary studies (70.1%) primarily focus on analyzing the source code",
+    "filter": null
+  },
+  {
+    "id": "q14",
+    "split": "dev",
+    "type": "comparative",
+    "question": "Which input representations were most common, and what were their reported percentages?",
+    "expected_answer": "Graph-based 38.8%, tree-based 16.4%, token-based 29.9%, hybrid 10.4%, and commit metrics 4.5%.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 18,
+    "evidence_quote": "Graph/Tree-based representation, accounting for the largest slice (i.e., 38.8% for Graph-based and 16.4% for Tree-based)",
+    "filter": null
+  },
+  {
+    "id": "q15",
+    "split": "dev",
+    "type": "paraphrase",
+    "question": "Why does the paper say graph-based representations are useful for vulnerability detection?",
+    "expected_answer": "They capture structural relationships, syntax, semantics, control flow, data flow, and dependencies among code elements.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 18,
+    "evidence_quote": "capture not only the syntax and structure of the code but also its semantics, control flow, and data flow",
+    "filter": null
+  },
+  {
+    "id": "q16",
+    "split": "test",
+    "type": "metadata_filter",
+    "question": "Within RQ2, which two embedding techniques were tied as the most common, and what share did each represent?",
+    "expected_answer": "Word2vec and graph embedding, each used by 25.4% of primary studies.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 21,
+    "evidence_quote": "Word2vec (25.4%), Graph embedding (25.4%)",
+    "filter": {"section": "results-rq2"}
+  },
+  {
+    "id": "q17",
+    "split": "test",
+    "type": "comparative",
+    "question": "How did the use of deep-learning models compare with classic machine-learning models?",
+    "expected_answer": "Deep-learning models were used by 79.1% of studies, while classic machine-learning models were used by 16.4%.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 22,
+    "evidence_quote": "79.1% of studies are using DL models for software vulnerability detection",
+    "filter": null
+  },
+  {
+    "id": "q18",
+    "split": "test",
+    "type": "metadata_filter",
+    "question": "In RQ3, what was the most frequent recurrent architecture and the most frequent graph architecture?",
+    "expected_answer": "LSTM was the most frequent recurrent architecture with 8 studies; GGNN was the most frequent graph architecture with 4 studies.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 24,
+    "evidence_quote": "LSTM 8",
+    "filter": {"section": "results-rq3"}
+  },
+  {
+    "id": "q19",
+    "split": "test",
+    "type": "metadata_filter",
+    "question": "What vulnerability family was most frequently covered, and which CWE subtype was most frequent within that family?",
+    "expected_answer": "Improper Control of a Resource Through its Lifetime (CWE-664) was most frequent; CWE-119 was the most frequent subtype, appearing in 14 studies.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 26,
+    "evidence_quote": "the vulnerability category that receives the highest attendance is related to the improper control of a resource through its lifetime (CWE-664)",
+    "filter": {"section": "results-rq4"}
+  },
+  {
+    "id": "q20",
+    "split": "test",
+    "type": "metadata_filter",
+    "question": "What five challenge areas does the paper identify for future software-vulnerability-detection research?",
+    "expected_answer": "Semantic representation, prediction granularity, false-positive removal, lack of training data, and lack of model interpretability.",
+    "gold_source_id": "automated-software-vulnerability-detection-survey-v1",
+    "gold_page": 28,
+    "evidence_quote": "We have summarized the challenges from previous studies into five different categories",
+    "filter": {"section": "results-rq5"}
+  }
+]

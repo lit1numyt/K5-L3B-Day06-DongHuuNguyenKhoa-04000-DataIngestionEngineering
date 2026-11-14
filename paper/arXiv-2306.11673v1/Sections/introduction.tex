@@ -1,0 +1,101 @@
+\section{Introduction}
+\label{sec:intro}
+Automatic detection of software security vulnerabilities is a critical component of assuring software security. Machine Learning (ML) and Deep Learning (DL) breakthroughs have sparked great interest in employing these models to discover software vulnerabilities in general software systems..~\cite{wang2018deep,cheng2021deepwukong,li2021vulnerability,le2021deepcva,yan2021han}. {ML/DL models excel at discovering subtle patterns and correlations from large datasets. They can automatically extract meaningful features from raw data, such as source code, and identify hidden patterns that may indicate software vulnerabilities. This capability is crucial in vulnerability detection, as vulnerabilities often involve subtle code characteristics and dependencies. Also, ML/DL models can handle a wide range of data types and formats, including source code~\cite{dam2018automatic,
+dam2017automatic,
+shippey2019automatically,
+wang2016automatically,
+jeon2021autovas,
+tian2020bvdetector,
+liu2020cd,
+yamaguchi2013chucky}, textual information~\cite{hoang2019deepjit}, and numerical features such as commit characteristics~\cite{pascarella2019fine,
+Vuldiggerpaper}. They can process and analyze these data representations to detect vulnerabilities effectively. This flexibility allows researchers to leverage various sources of data and incorporate different features for comprehensive vulnerability detection.} The overall process to leverage ML/DL models for software vulnerability detection is as follows: \noindent \textbf{Data collection:} The first step toward building a vulnerability detection model is to collect relevant vulnerable data for training the models. There are multiple sources for vulnerability detection datasets (we elaborate on this in RQ2), the researchers either use benchmark data~\cite{le2018maximal,
+zou2019mu,
+cao2022mvd,
+ghaffarian2021neural,
+wu2021peculiar,
+ziems2021security,
+zhuang2020smart,
+li2021sysevr,
+filus2020random,
+li2018vuldeepecker,
+Vuldiggerpaper} or collect from the open source~\cite{fu2022linevul,
+chen2021neural,
+perl2015vccfinder,
+riom2021revisiting,
+ni2022best} based on the requirements and the type of vulnerabilities. \noindent \textbf{Data representation:} Once the data is collected, it needs to be preprocessed to prepare it for training. The preprocess includes using appropriate representation techniques, i.e., graph/tree representation~\cite{zou2019mu,
+cao2022mvd,
+ghaffarian2021neural,
+wu2021peculiar,
+lin2017poster,
+zhuang2020smart,
+li2017software,
+lin2019software,
+li2021sysevr,
+duan2019vulsniper,
+zheng2021vulspg,
+zhuang2022just,
+cheng2022path,
+liu2021smart}, token representation~\cite{3429444,
+8594942,
+3327890,
+hin2022linevd,
+le2018maximal,
+chen2021neural,
+scandariato2014predicting,
+ziems2021security,
+filus2020random}, or using commit characteristics. \noindent \textbf{Embedding:} This step involves converting the source code representation into numerical format~\cite{3429444,
+8594942,
+3327890,
+hin2022linevd,
+fu2022linevul,
+le2018maximal,
+cao2022mvd,
+ghaffarian2021neural,
+lin2017poster,
+scandariato2014predicting,
+perl2015vccfinder}(vectors or embeddings) that can be utilized by machine learning or deep learning models for vulnerability detection. \noindent \textbf{Model selection and architecture design:} An suitable ML/DL model must be chosen based on the software vulnerability detection task. This can include everything from simple ML algorithms like SVM or Random Forests~\cite{chen2020machine,
+sabetta2018practical,
+zhou2017automated} to more advanced DL architectures like CNNs~\cite{hoang2019deepjit,
+yan2021han,
+8594942} or RNNs. The architecture of the model is intended to extract significant characteristics and patterns from the input data. \noindent \textbf{Training:} In the training phase, the vulnerability detection dataset is separated into training and validation sets, and the model learns from labeled data. The model's parameters are updated iteratively depending on the prediction errors, using optimization techniques such as gradient descent. \noindent \textbf{Evaluation and validation:} Once the training is finished, the model's performance is evaluated using a separate test dataset. Various metrics such as accuracy, precision, recall, and F1 score are calculated to assess the model's effectiveness in detecting vulnerabilities. The model may also be validated against real-world vulnerabilities to measure its practical utility.
+
+Although many studies have utilized ML/DL to detect software vulnerabilities, there has not been a comprehensive review to consolidate the various approaches and characteristics of these techniques. Conducting such a systematic survey would be beneficial for practitioners and researchers to gain a better understanding of the current state-of-the-art tools for vulnerability detection, and could serve as inspiration for future studies. 
+This study conducts a detailed and comprehensive survey to review, analyze, describe, and classify vulnerability detection papers from different perspectives. We analyzed 67 articles published in 37 flagship SE journals and conferences from 2011 to 2022. %\song{add 2022 papers please} \nima{addressed}. 
+We investigated the following research questions (RQs) in this study:
+\begin{itemize}
+    \item \textbf{RQ1: What is the trend of studies using ML/DL models for vulnerability detection?}
+    \begin{itemize}
+        \item RQ1.1. What are the trends of studies in software vulnerability detection studies over time?
+        \item RQ1.2. What is the distribution of the publication venues?
+    \end{itemize}
+    \item \textbf{RQ2: What are the characteristics of experiment datasets used in software vulnerability detection?}
+    \begin{itemize}
+    \item RQ2.1. What is the source of data?
+    \item RQ2.2. What are the types of data used in primary studies?
+    \item RQ2.3. How input data are represented?
+    \item RQ2.4. How input data are embedded for feature space?
+    \end{itemize}
+    \item \textbf{RQ3. What are the different ML/DL models used for vulnerability detection?}
+    \item \textbf{RQ4. What are the most frequent type of vulnerabilities covered in these studies?}
+  %  \item \textbf{RQ5. Is the interpretability of ML/DL models addressed in existing studies?}
+    \item \textbf{RQ5. What are possible challenges and open directions in software vulnerability detection?}
+\end{itemize}
+% In RQ1, we examine the trend of publications that use ML/DL for vulnerability detection, including the evolution of research and the distribution of publication venues. RQ2 describes vulnerability datasets used by existing ML/DL-based models, including their sources, types, and representations, as well as analyses of the different embedding techniques used by these approaches. RQ3 explores the methodologies, architectures, and design assumptions of these ML/DL-based vulnerability detection approaches. 
+% In RQ4, we study the types of vulnerabilities involved. In RQ5, we check the interpretability issue of these DL-based and ML-based security detection models. Finally, we summarize the challenges and new directions for future research in RQ6. 
+
+This paper makes the following contributions:
+
+\begin{itemize}
+    \item We thoroughly analyzed 67 relevant studies that used ML/DL techniques to detect security vulnerabilities regarding publication trends, distribution of publication venues, and types of contributions.
+    \item We conducted a comprehensive analysis to understand the dataset, the processing of data, data representation, model architecture, model interpretability, and the types of involved vulnerabilities of these ML/DL-based vulnerability detection techniques.
+    \item We provided a classification of ML/DL models used in vulnerability detection based on their architectures and analysis of technique selection strategy on these models.
+    \item We discuss distinct technical challenges of using ML/DL techniques in vulnerability detection and outline key future directions. 
+    \item We have shared our results and analysis data as a replication package\footnote{https://colab.research.google.com/drive/1O42duwz34H3fRoyfA37EU6Ig2u16R1Lb?usp=sharing} to allow other researchers easily follow this paper and extend it. 
+\end{itemize}
+
+
+{We believe that this work is useful for researchers and practitioners in the field of software engineering and cybersecurity, particularly those with an interest in software vulnerability detection and mitigation. In addition, the findings of our systematic survey may also be useful to policymakers, software vendors, and other stakeholders who are concerned with improving software security and reducing the risk of cyberattacks. These individuals may use the insights provided by the review to inform their decisions about software development, procurement, and risk management.}
+
+The remaining part of this paper is organized as follows: Section~\ref{related} summarizes existing studies focusing on proposing a systematic survey for software vulnerability detection.
+Section 2 presents related work on systematic surveys for software vulnerability detection using ML/DL techniques.
+Section 3 presents the research methodology proposed in this paper for paper collection and criteria for including and excluding studies. Section 4 addresses research questions and corresponding results. Section 5 discusses the possible limitations of this systematic survey. Finally, section 6 discusses the conclusion and future directions. 

@@ -1,0 +1,155 @@
+\subsection{RQ5. What are possible challenges and open directions in software vulnerability detection?} 
+% \song{need more explanation}
+%
+We have summarized the challenges from previous studies into five different categories, %which are shown in Table \ref{tbl:problems}. The details regarding each category are 
+which are discussed as follows. 
+
+%\input{Tables/table11}
+
+% \song{Nima: please only list the ones that have more than 2 papers.} \nima{done}
+
+\noindent \textbf{Challenge 1: Semantic Representation.} 
+The biggest challenge in vulnerability detection through learning is the inadequate modeling of the comprehensive semantics of complex vulnerabilities by current models \cite{dam2018automatic, dam2017automatic, shippey2019automatically, wang2016automatically, jeon2021autovas, phan2017convolutional, hoang2019deepjit, cheng2021deepwukong, zhou2019devign, wu2021peculiar,li2017software, li2021sysevr, li2021vuldeelocator, duan2019vulsniper, zheng2021vulspg, zhuang2022just, cheng2022path, liu2021smart,yang2022source, nguyen2022mando, nguyen2022mando2}. These vulnerabilities often exhibit intricate characteristics and patterns that are not fully captured by existing ML/DL models that treat source code snippets as a linear sequence like natural language, or only partially represent source code snippets. Unlike natural language, the source code of real-world projects contains structural and logical information that must be considered by ML/DL models using AST, data flow, and control flow. Therefore, current ML/DL approaches fall short of identifying complex vulnerability patterns.
+
+\noindent \textbf{Challenge 2: Prediction Granularity.}
+The ability of DL models to identify the location of vulnerabilities is influenced by the level of granularity in their inputs. Current DL models use a coarser level of granularity, such as method and file, for vulnerability detection. To achieve finer-grained inputs, program slicing is necessary, but it poses a challenge. The crucial question is how to perform program slicing effectively to eliminate unwanted noise in input data and provide more specific inputs. Current tools \cite{pascarella2019fine,
+dinella2020hoppity, fu2022linevul, zou2019mu, cao2022mvd, lin2017poster, li2021vulnerability, ding2022velvet,
+zou2022mvulpreter} concentrate on library/API function calls, arithmetic operations, and pointer usages, but this approach is not sufficient since not all vulnerabilities originate from these slicing criteria.
+
+
+\noindent \textbf{Challenge 3: False Positive Removal.} 
+% \jie{I assume the challenges are those faced by ML/DL-related approaches. yet this one is mainly because of the static analyzer? } \nima{that is correct, but the researchers mentioned that we propose dl models to overcome the high false positive rate of static detectors.}
+The most commonly used tools for detecting software vulnerabilities and bugs are static analyzers \cite{zhou2017automated,
+kronjee2018discovering,
+zeng2021gcn2defect,
+3360588,
+3327890,
+ziems2021security,
+zou2019mu}. These tools utilize hard-coded rules that are defined by experts to model the runtime behavior of a program without the need for compilation. This approach has several benefits, such as effectively identifying the location of vulnerabilities in source codes, which is challenging in large-scale projects with thousands of files and artifacts. Additionally, static analyzers are used at the early stage of the software development process, which helps reduce software maintenance costs. However, relying on expert-defined rules comes with a high false-positive rate, as these rules may not be generalizable to new vulnerabilities that have intricate and sophisticated program semantics. Another significant issue is that defining and updating rules is a labor-intensive and time-consuming process that requires experts to have in-depth knowledge of emerging vulnerabilities. That is why data-driven vulnerability detection has emerged to overcome the aforementioned challenges \cite{zhou2017automated,
+kronjee2018discovering, zeng2021gcn2defect, 3360588, 3327890, ziems2021security, zou2019mu}. 
+
+\noindent \textbf{Challenge 4: Lack of Training Data.}
+A significant weakness of DL models, particularly in software vulnerability detection, is their insatiable need for data \cite{chen2020machine,liu2020cd, lin2019software, Vuldiggerpaper, ni2022best}. In domains such as image classification, there is an ample supply of labeled data, making it possible to train DL models effectively. Furthermore, there are many pre-trained models available that can be fine-tuned for detection tasks. However, in software vulnerability detection, data scarcity is a major problem since labeling ground truth information is a challenging task. To obtain training data, multiple online platforms such as Stack Overflow, GitHub, and issue tracking or bug tracking systems are used. While these platforms contain billions of records, the labeling process is difficult and is often done manually. One possible solution is the automatic labeling of data, but this approach is challenging as it often generates many false positives. Additionally, some researchers use unsupervised classification for vulnerability detection, but this method also suffers from limited precision.
+
+%\song{add a new challenge} \nima{done}
+
+%\noindent \textbf{Challenge 5: Not enough data as source codes are not compilable.}
+%Binary software vulnerability detection is a new task in software vulnerability detection where DL models are trained on Assembly code rather than high-level source codes~\cite{phan2017convolutional, nguyen2020deep, yan2021han, huang2021hunting}. The intuition is that feeding assembly codes instead of high-level source code semantics increases vulnerability detection performance as assembly codes convey a more meaningful representation of control flow and jumping instructions. However, the major drawback of this emerging era in software vulnerability detection is that the source code needs compilation to generate source code assemblies. In practice, not all source codes are compilable as source codes often require dependencies to be installed to make them runnable. 
+
+\noindent \textbf{Challenge 5: Lack of Model Interpretability.}
+Interpretability in DL models refers to the ability to understand and explain the decisions made by the model~\cite{dwivedi2023explainable, minh2022explainable}. In the context of software vulnerability detection~\cite{3429444, li2021vulnerability,liu2021smart}, there are several challenges that make interpretability challenging for DL models. First, source code can be highly complex, especially in large software projects. It often consists of multiple files, functions, and dependencies, making it difficult to extract meaningful and concise explanations from the code~\cite{jiang2022bugs}. Software systems are dynamic and undergo changes over time. Code is often maintained, updated, and refactored, which can introduce complexities in interpreting the decisions made by AI models. The model's explanations may not be applicable to the current version of the code if it has evolved since the model's training.
+
+%\song{summarize your prior RQ5 here} \nima{done}
+%\song{missing a summarization for RQ6} \nima{done}
+
+\mybox{Answer to RQ5}{red!40}{gray!10}{
+(1) Current models inadequately capture the comprehensive semantics of complex vulnerabilities, as they fail to consider the structural and logical information present in source code snippets. Existing ML/DL models treat source code as a linear sequence, which limits their ability to identify intricate vulnerability patterns.
+
+(2) DL models often use a coarse level of granularity for vulnerability detection, such as method and file level. Achieving finer-grained inputs requires effective program-slicing techniques to eliminate noise and provide more specific inputs. Current approaches focus on certain slicing criteria, but vulnerabilities can originate from other sources as well.
+
+(3) DL models require a significant amount of labeled data for effective training. However, in software vulnerability detection, there is a scarcity of labeled data due to the challenging task of manual labeling. Automatic labeling approaches often generate false positives, and unsupervised classification suffers from limited precision.
+}
+    
+% \noindent \textbf{Challenge 4: Out-of-vocabulary (OoV) problem.} 
+% ML/DL models for vulnerability detection are often supervised models which are trained based on a set of ground truth datasets. The assumption is that both train and test data are drawn from the same distribution. This assumption, however, is violated in real-world scenarios due to the emergence of new vulnerability types and software projects. Models trained on known vulnerability types will fail to detect new ones because they have been built on the assumption that both training and test data are drawn from the same distribution. In practice, this problem is called a Cross-Domain problem in which the train data comes from a source, while the test data come from another. Existing vulnerability detection approaches are failed to detect new vulnerabilities. 
+
+
+% \noindent \textbf{Challenge 6: Lack of considering execution flow.}
+% Many vulnerabilities have sophisticated programming patterns which need to be considered during source code modeling for software vulnerability detection. We find that 3 primary studies used ML/DL models to detect security vulnerabilities exploited by source code execution flow.
+
+
+% \noindent \textbf{Challenge 7: Ignoring correlations between code contexts.}
+% DL-based models are highly dependent on the context of source code snippets. For example, statements that are defined at the beginning of a file, class, or method might be used at the end. Also, vulnerable source code may call other functions outside of the context. So, there is a high possibility that DL models ignore such relationships. In another word, inter-procedural analysis is required to be performed before feeding input data to DL models. 
+
+
+% \noindent \textbf{Challenge 8: Class imbalance problem.}
+% Class imbalance problem is also common in software security vulnerability detection. The problem is that frequency of non-vulnerable samples is often higher than vulnerable samples. Even though there is a rising trend in reporting vulnerable cases in CVE, still they are limited and it poses serious challenges to ML/DL models. One major challenge is biases in predictions in which ML/DL models are biased toward negative samples. Thus, the outcome of classification is misleading and can be problematic in real-world settings. 
+
+% \noindent \textbf{Challenge 9: Only source code is not sufficient for vulnerability detection.}
+% During our analysis, we find that some papers argue that only building vulnerability detection with source code snippets is not sufficient to have accurate and effective models. They state that it is essential to feed other software artifacts to ML/DL models to increase vulnerability detection performance. For example, feeding code comments will increase classification performance remarkably. Some commit-level approaches also argue that feeding source code is not enough and commits' characteristics as metadata are required to increase commit-level and just-in-time vulnerability detection and easement.
+
+% \noindent \textbf{Challenge 10: Artificial code samples.}
+% Many DL techniques are trained on top of artificial code samples, i.e. samples made by human effort. However, these samples are simple and do not reflect real-world vulnerabilities. They often come from different distributions. DL models built on top of artificial examples fail to detect vulnerabilities from real-world projects as these vulnerabilities contain sophisticated program semantics. 
+
+% \noindent \textbf{Challenge 12: Miss classification cost.} In safety-critical software systems, when building ML/DL modeling for vulnerability detection, the classification of vulnerable samples as non-vulnerable is costly compared to the opposite case where non-vulnerable samples are detected as vulnerable. In other words, in mission-critical systems, it is desired to have a lower False-negative compared to have higher true positive. 
+
+
+
+% \begin{table}[H]
+% \caption{Distribution of problems addressed in primary studies.}
+% \begin{tabular}{lp{5cm}lp{6cm}}
+% \toprule
+%  No & Categories                                                                       & \#Studies     &   References      \\
+% \midrule
+%  1&  Semantic   & 21            &   \cite{dam2018automatic,
+% dam2017automatic,
+% shippey2019automatically,
+% wang2016automatically,
+% jeon2021autovas,
+% phan2017convolutional,
+% hoang2019deepjit,
+% cheng2021deepwukong,
+% zhou2019devign,
+% wu2021peculiar,
+% li2017software,
+% li2021sysevr,
+% li2021vuldeelocator,
+% duan2019vulsniper,
+% zheng2021vulspg,
+% zhuang2022just,
+% cheng2022path,
+% liu2021smart,
+% yang2022source,
+% nguyen2022mando,
+% nguyen2022mando2}                 \\
+%  2&   Granularity  & 9             &    \cite{pascarella2019fine,
+% dinella2020hoppity,
+% fu2022linevul,
+% zou2019mu,
+% cao2022mvd,
+% lin2017poster,
+% li2021vulnerability,
+% ding2022velvet,
+% zou2022mvulpreter}                \\
+%  3&   High false positive  &     7          &      \cite{zhou2017automated,
+% kronjee2018discovering,
+% zeng2021gcn2defect,
+% 3360588,
+% 3327890,
+% ziems2021security,
+% zou2019mu}              \\
+%  4&   Training data problem   & 5             &      \cite{chen2020machine,
+% liu2020cd,
+% lin2019software,
+% Vuldiggerpaper,
+% ni2022best}               \\
+%  5&   Rely on expert rules  & 4             &    \cite{tian2020bvdetector,
+% liu2021combining,
+% le2018maximal,
+% zhuang2020smart}                 \\
+%  6&   Commits  & 4             &      \cite{le2021deepcva,
+% hin2022linevd,
+% chen2021neural,
+% perl2015vccfinder}              \\
+%  7&   Consider other data sources   & 4             &       \cite{sabetta2018practical,
+% 8594942,
+% scandariato2014predicting,
+% riom2021revisiting}           \\
+%  8&   Others  & 4             & \cite{ghaffarian2021neural,nguyen2020deep,
+% filus2020random,
+% yamaguchi2011vulnerability}                    \\
+%  9&   Consider different code fragments & 2             &   \cite{pradel2018deepbugs,
+% 3429444}                \\
+% 10&  Irrelevant code fragments & 1             &    \cite{huang2021hunting}                \\
+% 11&   Context modeling  & 1             &       \cite{yan2021han}             \\
+% 12&  Class imbalance problem & 1             &       \cite{liu2019deepbalance}             \\
+% 13&  Support Flow Analysis & 1             &     \cite{hoang2019deepjit}               \\
+% 14&  LSTM performance problem  & 1             &         \cite{wang2020combining}           \\
+% 15&   Specific vulnerability types & 1             &    \cite{yamaguchi2013chucky}                \\
+% 16&  Reentrancy & 1             &        \cite{zhang2022reentrancy}             \\
+% \hline
+%  - & \textbf{SUM}  & \textbf{67}    &  \\
+%                               \bottomrule
+% \end{tabular}
+% \label{tbl:problems}
+% \end{table}

@@ -1,0 +1,75 @@
+\begin{table}[t!]
+\caption{Distribution of input representations in primary studies.}
+% \song{add commit metrics related papers} \nima{done}
+\setlength{\tabcolsep}{3pt}
+\scalebox{0.9}{
+\begin{tabular}{p{0.13\linewidth}lllp{0.35\linewidth}}
+\toprule
+Category                                    & Artifact                      & \#Studies & Total  & References \\
+\midrule
+\multirow{1}{*}{Graph/Tree-based} & Source code as a graph                 & 22        & \multirow{1}{*}{32(32)}   &    \cite{jeon2021autovas,
+tian2020bvdetector,
+liu2021combining,
+kronjee2018discovering,
+zeng2021gcn2defect,
+3360588,
+zou2019mu,
+cao2022mvd,
+ghaffarian2021neural,
+wu2021peculiar,
+zhuang2020smart,
+li2021sysevr,
+li2018vuldeepecker,
+duan2019vulsniper,
+zheng2021vulspg,
+cheng2022path,
+liu2021smart,
+ding2022velvet,
+yang2022source,
+zou2022mvulpreter,
+nguyen2022mando,
+nguyen2022mando2}              \\
+                                            & Source code as a tree                  & 9        &    &     \cite{dam2017automatic,
+shippey2019automatically,
+wang2016automatically,
+liu2020cd,
+lin2017poster,
+li2017software,
+lin2019software,
+li2021vuldeelocator,
+zhuang2022just}             \\
+                                            & Binary code as graph             & 2         &    &     \cite{phan2017convolutional,
+huang2021hunting}             \\
+                                            \hline
+\multirow{1}{*}{Token-based} & Source code as a token                 & 10        & \multirow{1}{*}{14(14)}   & \cite{dam2018automatic,
+ yamaguchi2013chucky,
+ hoang2019deepjit,
+ 3429444,
+ 8594942,
+ 3327890,
+ scandariato2014predicting,
+ ziems2021security,
+ filus2020random,
+ yamaguchi2011vulnerability}                 \\
+                                            & Binary code as a token             & 3         &    &      \cite{nguyen2020deep, yan2021han, le2018maximal}            \\
+                                            & Text as a token                 & 1         &    &     \cite{zhou2017automated}             \\
+\hline
+\multirow{1}{*}{Hybrid} & Token Sequence+Commit Metrics & 4 & \multirow{1}{*}{8(8)}                 &      \cite{chen2020machine, perl2015vccfinder, riom2021revisiting, ni2022best}            \\
+                                            & Token Sequence+Term frequency & 1         &    &      \cite{sabetta2018practical}            \\
+                                            & Token Sequence+ Graph         & 1         &    &      \cite{fu2022linevul}            \\
+                                            & Graph+Tree+Token Sequence     & 1         &    &      \cite{li2021vulnerability}            \\
+                                            & Token+Tree     & 1         &    &      \cite{zhang2022reentrancy}            \\
+\hline
+\multirow{1}{*}{Commits} & Commit Metrics & 3 & \multirow{1}{*}{3}                 &      \cite{pascarella2019fine,
+Vuldiggerpaper,
+ni2022best}            \\
+                                            \hline
+\multirow{1}{*}{SUM} & - & - & \multirow{1}{*}{57(55)}                 &      \cite{pascarella2019fine,
+Vuldiggerpaper,
+ni2022best}            \\         
+\bottomrule
+\end{tabular}
+}
+\label{tbl:represenation_dist_tbl}
+\end{table}
+

@@ -1,0 +1,130 @@
+\documentclass[acmsmall]{acmart}
+\input{macros}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+\newcommand{\mybox}[4]{
+    \begin{figure}[h]
+        \centering
+    \begin{tikzpicture}
+        \node[anchor=text,text width=\columnwidth-1.2cm, draw, rounded corners, line width=1pt, fill=#3, inner sep=5mm] (big) {\\#4};
+        \node[draw, rounded corners, line width=.5pt, fill=#2, anchor=west, xshift=5mm] (small) at (big.north west) {#1};
+    \end{tikzpicture}
+    \end{figure}
+}
+
+\setcopyright{acmcopyright}
+\copyrightyear{2018}
+\acmYear{2018}
+\acmDOI{XXXXXXX.XXXXXXX}
+
+
+%%
+%% These commands are for a JOURNAL article.
+\acmJournal{JACM}
+\acmVolume{37}
+\acmNumber{4}
+\acmArticle{111}
+\acmMonth{8}
+
+\begin{document}
+
+\title{A Survey on Automated Software Vulnerability Detection Using Machine Learning and Deep Learning}
+
+\author{Nima Shiri harzevili}
+\email{nshiri@yorku.ca}
+\affiliation{%
+  \institution{York University}
+  \streetaddress{4700 Keele St.}
+  \city{North York}
+  \state{Ontario}
+  \country{Canada}
+  \postcode{M3J 1P3}
+}
+
+\author{Alvine Boaye Belle}
+\affiliation{%
+  \institution{York University}
+  \streetaddress{4700 Keele St.}
+  \city{North York}
+  \country{Canada}}
+\email{alvine.belle@lassonde.yorku.ca}
+
+\author{Junjie Wang}
+\affiliation{%
+  \institution{Institute of Software, Chinese Academy of Sciences}
+  \city{Beijing}
+  \country{China}}
+  \email{junjie@iscas.ac.cn}
+
+\author{Song Wang}
+\affiliation{%
+  \institution{York University}
+  \streetaddress{4700 Keele St.}
+  \city{North York}
+  \country{Canada}}
+\email{wangsong@yorku.ca}
+
+\author{Zhen Ming (Jack) Jiang}
+\affiliation{%
+  \institution{York University}
+  \streetaddress{4700 Keele St.}
+  \city{North York}
+  \country{Canada}}
+  \email{zmjiang@eecs.yorku.ca}
+
+  \author{Nachiappan Nagappan}
+\affiliation{%
+  \institution{Meta}
+  \city{Seattle}
+  \country{USA}}
+  \email{nachiappan.nagappan@gmail.com}
+
+\begin{abstract}
+Software vulnerability detection is critical in software security because it identifies potential bugs in software systems, enabling immediate remediation and mitigation measures to be implemented before they may be exploited. Automatic vulnerability identification is important because it can evaluate large codebases more efficiently than manual code auditing. Many Machine Learning (ML) and Deep Learning (DL) based models for detecting vulnerabilities in source code have been presented in recent years. However, a survey that summarises, classifies, and analyses the application of ML/DL models for vulnerability detection is missing. It may be difficult to discover gaps in existing research and potential for future improvement without a comprehensive survey. This could result in essential areas of research being overlooked or under-represented, leading to a skewed understanding of the state of the art in vulnerability detection. This work address that gap by presenting a systematic survey to characterize various features of ML/DL-based source code level software vulnerability detection approaches via five primary research questions (RQs). Specifically, our RQ1 examines the trend of publications that leverage ML/DL for vulnerability detection, including the evolution of research and the distribution of publication venues. RQ2 describes vulnerability datasets used by existing ML/DL-based models, including their sources, types, and representations, as well as analyses of the embedding techniques used by these approaches. RQ3 explores the model architectures and design assumptions of ML/DL-based vulnerability detection approaches. RQ4 summarises the type and frequency of vulnerabilities that are covered by existing studies. Lastly, RQ5 presents a list of current challenges to be researched and an outline of a potential research roadmap that highlights crucial opportunities for future work.
+
+%RQ5 focuses on the interpretability of the ML/DL-based vulnerability detection approaches, specifically how they explain the detected vulnerabilities.  
+
+%our analysis finds that 65.7\% of the studies utilized benchmark data for software vulnerability detection. Among the primary studies, we identified four classes of DL models, consisting of a total of 22 different deep neural networks (DNNs). These DL models were categorized as recurrent models, graph models, general models, and convolutional models. Among the DL models used in software vulnerability detection, recurrent neural networks (RNNs) were found to be the most popular. Specifically, RNNs with LSTM (Long Short-Term Memory) cells were the preferred architecture in the recurrent model category, appearing in 8 primary studies. Within the graph model category, the most popular DL model was GGNN (Gated Graph Neural Network), which was employed by 4 primary studies. Regarding vulnerability types covered in the existing studies, we discovered that the most frequent type of vulnerability addressed was \textit{Improper Control of a Resource Through its Lifetime (664)}, accounting for 42 primary studies.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10002978.10003022.10003023</concept_id>
+<concept_desc>Security and privacy~Software security engineering</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Security and privacy~Software security engineering}
+                    
+\keywords{source code, software security, software vulnerability detection, software bug detection, machine learning, deep learning}
+
+\maketitle
+
+\input{Sections/introduction}
+%\input{Sections/Background}
+\input{Sections/related}
+\input{Sections/methodology}
+\input{Sections/RQ1}
+\input{Sections/RQ2}
+\input{Sections/RQ3}
+\input{Sections/RQ4}
+%\input{Sections/RQ5}
+\input{Sections/RQ6}
+\input{Sections/Limitations}
+\input{Sections/conclusion}
+
+%\section{Acknowledgments}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{sample-acmsmall}
+
+\appendix
+
+\end{document}
+\endinput

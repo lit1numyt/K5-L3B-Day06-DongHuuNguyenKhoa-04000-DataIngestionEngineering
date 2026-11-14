@@ -1,0 +1,95 @@
+
+
+
+
+\begin{table}[h]
+\caption{Distribution of DL models in primary studies.}
+\setlength{\tabcolsep}{3pt}
+\scalebox{0.9}{
+\begin{tabular}{lllll}
+\toprule
+Category                          & Model Name            & \# Studies & Total    & References           \\
+\midrule
+\multirow{1}{*}{Recurrent Models} & LSTM                   & 8         & \multirow{1}{*}{31(21)}    &    \cite{dam2018automatic,
+dam2017automatic,
+wang2016automatically,
+tian2020bvdetector,
+liu2020cd,
+liu2019deepbalance,
+ziems2021security,
+zhuang2022just}         \\
+                                  & BiLSTM                  & 8       &                       &   \cite{jeon2021autovas,
+tian2020bvdetector,
+3429444,
+zou2019mu,
+lin2017poster,
+lin2019software,
+li2021vuldeelocator,
+li2018vuldeepecker}         \\
+                                  & BGRU                  & 6       &                        &      \cite{jeon2021autovas,
+tian2020bvdetector,
+yan2021han,
+3429444,
+li2021sysevr,
+li2021vuldeelocator}      \\
+                                  & GRU                   & 4       &                        &  \cite{jeon2021autovas,
+tian2020bvdetector,
+3360588,
+hin2022linevd}         \\
+                                  & RNN                   & 3       &                        &      \cite{tian2020bvdetector,
+le2018maximal,
+filus2020random}      \\
+                                  & BRNN                   & 2       &                        &      \cite{tian2020bvdetector,
+le2018maximal}      \\
+                                  \hline
+\multirow{1}{*}{Graph Models}     &  GGNN                  & 4       &        \multirow{1}{*}{18(15)}                   &     \cite{wang2020combining,
+dinella2020hoppity,
+ding2022velvet,
+zou2022mvulpreter}    \\
+                                & GCN                     & 4         & &     \cite{cheng2021deepwukong,
+zeng2021gcn2defect,
+ghaffarian2021neural,
+li2021vulnerability}        \\
+                                  & GAT                   & 3       &                      &    \cite{cheng2021deepwukong,
+fu2022linevul,
+ghaffarian2021neural}     \\
+                                  & DR-GCN                & 2       &                      &      \cite{liu2021combining,
+zhuang2020smart}   \\
+                                  & RGCN                  & 1       &                      &        \cite{zheng2021vulspg} \\
+                                  & FS-GNN                & 1       &                     &      \cite{cao2022mvd}    \\
+                                  & K-GNN                 & 1       &                      &       \cite{cheng2021deepwukong}  \\
+                                  & DGCNN                 & 1       &                      &      \cite{phan2017convolutional}   \\
+                                  & GGRN                  & 1       &                      &      \cite{zhou2019devign}   \\
+                                  \hline
+Attention Models  & -    & 7         & \multirow{1}{*}{7}   &           \cite{le2021deepcva,
+3360588,
+zou2019mu,
+duan2019vulsniper,
+cheng2022path,
+liu2021smart,
+zhang2022reentrancy} \\
+\hline
+Convolutional Models              & CNN                   & 6       & 6                     &      \cite{hoang2019deepjit,
+yan2021han,
+3429444,
+8594942,
+li2017software,
+filus2020random}  \\
+\hline
+\multirow{1}{*}{General Models}   &   DBN                   & 1       &         5(4)             &     \cite{wang2016automatically}     \\
+                                  & Auto Encoders         & 1       &                     &       \cite{le2018maximal}   \\
+                                  & Memory Neural Network & 1       &                      &       \cite{hoang2019deepjit}  \\
+                                  & GAN                   & 1       &                      &       \cite{3327890} \\
+                                  & Para2Vec              & 1       &                      &       \cite{le2018maximal} \\
+                                  \hline
+Transformers                      &     Seq2Seq Transformer    & 1       &     4(4)                &     \cite{chen2021neural}      \\
+                                  &     Graph CodeBERT    & 1       &                     &     \cite{wu2021peculiar}      \\
+                                  &     CodeBERT    & 1       &                     &     \cite{ni2022best}      \\
+                                  &     HGT    & 1       &                     &     \cite{yang2022source}      \\
+\hline
+SUM              & -                   & -       & 71(49)    &     -  \\
+\bottomrule
+\end{tabular}
+}
+\label{tbl:DL_dist}
+\end{table}

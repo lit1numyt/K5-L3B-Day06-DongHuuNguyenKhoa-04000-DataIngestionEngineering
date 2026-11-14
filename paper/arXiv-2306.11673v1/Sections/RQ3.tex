@@ -1,0 +1,159 @@
+\subsection{RQ3. What are the ML/DL models used for software vulnerability detection?}
+%\song{Nima: You need explain a little bit here, why only decompose DL models}
+
+{In this section, we provide detailed information about the various ML/DL models utilized for software vulnerability detection. Initially, we present an analysis of the usage distribution of ML/DL models based on primary studies. Subsequently, we delve into the distribution of the usage of DL models used in primary studies over time. However, we have not extensively analyzed the distribution of ML models since their prevalence is relatively small compared to DL models. Nonetheless, we provide a comprehensive list of classic ML models that have been commonly employed in primary studies.}
+
+    % \pie{28/RNN,
+    % 22/GNN,
+    % 10/Attention,
+    % 8.9/CNN,
+    % 5.89/General,
+    % 5.89/Transformers
+
+\begin{figure}[t!]
+\centering
+\begin{tikzpicture}[scale=0.5]
+    \pie{79.1/DL,
+    16.4/ML,
+    3.0/DM,
+    1.5/LM
+    }
+\end{tikzpicture}
+\caption{Distribution of models used in primary studies. DM stands for Distance Measure and LM stands for Language Model.}
+\label{fig:models}
+\end{figure}
+ 
+% \begin{figure}[H]
+% \centering
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+% \begin{tikzpicture}[scale=0.6]
+%     \pie{79.1/DL,
+%     16.4/ML,
+%     3.0/Distance Measure,
+%     1.5/Language Model
+%     }
+% \end{tikzpicture}
+%   \caption{Distribution of models used in primary studies.}
+%   % \jie{it might be not suitable to use the title `ML' since in the subfigure, also have the ML subtype. Also the reviewers might anticipant ML can be SVM, decision tree, Bayes, and something else. Might be see `distribution of ML/DL models?' or something similar} \nima{The distribution of ML is shown in Table 10. }
+%   \label{fig:models1}
+% \end{subfigure}%
+% % \begin{subfigure}{.5\textwidth}
+% %   \centering
+% % \begin{tikzpicture}[scale=0.6]
+% %     \pie{28.3/RNN,
+% %     22.3/GNN,
+% %     10.4/Attention,
+% %     7/CNN,
+% %     5.8/General,
+% %     5.7/Transformers
+% %     }
+% % \end{tikzpicture}
+% %   \caption{Distribution of DL models.}
+% %   \label{fig:models2}
+% % \end{subfigure}%
+% \newline
+% \caption{Distribution of ML/DL models used in primary studies.}
+% \label{fig:models}
+% \end{figure}
+
+
+From Figure \ref{fig:models}, it is observable that 79.1\% of studies are using DL models for software vulnerability detection \cite{russell2018automated, dam2018automatic, dam2017automatic, wang2016automatically, jeon2021autovas, an2020avdhram, tian2020bvdetector, liu2020cd, liu2021combining, wang2020combining, phan2017convolutional, lin2018cross, liu2019deepbalance, pradel2018deepbugs, le2021deepcva, hoang2019deepjit, cheng2021deepwukong, zhou2019devign} while merely 16.4\% of studies use classic ML models \cite{nguyen2020deep, kronjee2018discovering, pascarella2019fine, yamaguchi2012generalized, scandariato2014predicting, riom2021revisiting, perl2015vccfinder, yamaguchi2011vulnerability}. Also, a limited number of studies use Language models denoted as \textit{LM} \cite{shippey2019automatically, pang2015predicting} and Distance Measures denoted as \textit{DM} \cite{yamaguchi2013chucky, huang2021hunting}. 
+
+\definecolor{yellow-green}{rgb}{0.6, 0.8, 0.2}
+\definecolor{verdigris}{rgb}{0.26, 0.7, 0.68}
+\definecolor{vermilion}{rgb}{0.89, 0.26, 0.2}
+\definecolor{ultrapink}{rgb}{1.0, 0.44, 1.0}
+\definecolor{orange}{rgb}{1,0.5,0}
+
+\pgfplotstableread{
+DLMODELS Attention CNN GNN General Hybrid RNN Transformers
+2016 	0 	0 	0 	1 	0 	0 	0
+2017 	0 	1 	1 	1 	0 	1 	0
+2018 	0 	1 	0 	1 	1 	3 	0
+2019 	2 	1 	1 	0 	1 	2 	0
+2020 	0 	0 	2 	0 	1 	6 	0
+2021 	1 	0 	11 	0 	2 	8 	1
+2022 	3 	0 	5 	0 	0 	3 	3
+}\testdata
+\begin{figure}[h]
+\centering
+\renewcommand{\arraystretch}{1}
+\resizebox{0.6\columnwidth}{!}{%
+    \begin{tikzpicture}[scale=0.6]
+    \begin{axis}[
+        ybar stacked,
+    	bar width=15pt,
+        ymin=0,
+        ymax=25,
+        xtick=data,
+        legend style={at={(1.01,0.54)},anchor=west},
+        reverse legend=true,
+        %yticklabels from table={\testdata}{Label},
+        xticklabels={ {2016}, {2017}, {2018}, {2019},
+       {2020}, {2021}, {2022}},
+        xticklabel style={rotate=25,anchor=east},
+    ]
+    \addplot + [ nodes near coords, fill=verdigris!80]      table    [y=Attention, meta=DLMODELS, x expr=\coordindex] {\testdata};
+    \addplot + [ nodes near coords, fill=vermilion!80]      table    [y=CNN, meta=DLMODELS, x expr=\coordindex] {\testdata};
+    \addplot + [nodes near coords, fill=blue!60]        table    [y=GNN, meta=DLMODELS, x expr=\coordindex] {\testdata};
+    \addplot + [ nodes near coords, fill=green!80]      table    [y=General, meta=DLMODELS, x expr=\coordindex] {\testdata};
+    \addplot + [nodes near coords, fill=ultrapink!60]         table    [y=Hybrid, meta=DLMODELS, x expr=\coordindex] {\testdata};
+    \addplot + [nodes near coords, fill=orange!60] table    [y=RNN, meta=DLMODELS, x expr=\coordindex] {\testdata};
+    \addplot + [nodes near coords, fill=yellow-green] table    [y=Transformers, meta=DLMODELS, x expr=\coordindex] {\testdata};
+\legend{Attention,
+CNN,
+GNN,
+General,
+Hybrid,
+RNN,
+Transformers
+}
+\end{axis}
+\end{tikzpicture}}
+\caption{Trend of DL models over time.}
+\newcommand{\squeezeup}{\vspace{-10.5mm}}
+% \jie{Un clear why list the `Attention' category since it is the sub-category in table 9} \nima{updated}
+\label{fig:dl_over_time}
+\end{figure}
+
+% Figure \ref{fig:models2} shows the distribution of DL models used in software vulnerability detection. As can be seen, RNN \cite{jeon2021autovas, tian2020bvdetector, du2020cross, 3429444, zou2019mu, lin2019software, li2021vuldeelocator, li2018vuldeepecker, dam2018automatic, dam2017automatic, jeon2021autovas, tian2020bvdetector, liu2020cd, liu2019deepbalance, mao2020explainable, ziems2021security, zhuang2022just,jeon2021autovas, an2020avdhram, yan2021han, 3429444, li2021sysevr, li2021vuldeelocator, russell2018automated, tian2020bvdetector, liu2019deepbalance, le2018maximal, filus2020random,  jeon2021autovas, tian2020bvdetector, le2021deepcva, 3360588, hin2022linevd} and GNN \cite{cheng2021deepwukong, zeng2021gcn2defect, ghaffarian2021neural, li2021vulnerability,   cheng2021deepwukong, fu2022linevul, ghaffarian2021neural, wang2020combining, dinella2020hoppity, ding2022velvet, zou2022mvulpreter, liu2021combining, zhuang2020smart, cao2022mvd, cheng2021deepwukong, liu2021combining, zheng2021vulspg, phan2017convolutional, zhou2019devign} are the most popular and widely used neural network models used in primary studies accounting for 65.4\% of primary studies.  There are a couple of reasons why RNN and GNN are widely used in the context of software vulnerability detection. Regarding RNNs, they are well-suited for sequential data analysis, making them suitable for vulnerability detection tasks that involve analyzing code sequences or textual representations of code. They can capture dependencies and contextual information by considering the order and relationships between tokens or code elements. This enables them to identify patterns, detect vulnerabilities, and understand the flow of information within the code. Regarding GNNs, they are highly effective in analyzing graph-structured data, which is useful in vulnerability detection tasks that involve modeling the relationships and dependencies between code elements. By representing code as a graph, GNNs can leverage message-passing algorithms to propagate information across the graph, capturing the context, and identifying vulnerabilities that depend on the code's structural relationships.
+% \jie{can simply explain why RNN and GNN are the most popular types}
+
+The graph in Figure \ref{fig:dl_over_time} illustrates the usage trend of DL models in detecting software vulnerabilities from 2016 to 2022. According to the trend, DL models were first introduced in 2016 for vulnerability detection, since then the use of RNNs for vulnerability detection showed an upward trend. %However, in 2020, there was a sudden decline in the usage of RNNs, but the trend rose again in 2021. 
+% We anticipate that the use of RNNs in vulnerability detection will increase in 2022.\jie{quite subjective statement, why RNN would increase in 2022? also current it is 2023} 
+The graph also demonstrates a rising trend in using GNNs for vulnerability detection from 2020 to 2022. This can be because GNNs are more powerful than RNNs in detecting vulnerabilities, as they can capture more meaningful and semantic representations of input source code. Since vulnerability types often have complex structures, GNNs are an excellent fit for detecting hidden structural information.
+
+
+
+
+
+% \jie{for the content in Table 9 and table 10, do we need to add some explanation about that? at least we may need to say in table 9, we present the XXXX, in table 10, we demonstrate the XXX}
+
+
+ 
+Table \ref{tbl:DL_dist} shows the distribution of DL models used in primary studies. As shown in the table, LSTM is the most frequently used recurrent model, appearing in 8 studies. BiLSTM and BGRU are also popular models with 8 and 6 studies respectively. It is also observable that GGNN is the most prevalent graph-based model, appearing in 4 studies. GCN, GAT, and DR-GCN are also commonly used accounting for 4, 3, and 2 studies respectively. The presence of these models highlights the importance of capturing graph structures and relationships between code elements in vulnerability detection. Attention models were also used in 7 primary studies. Attention mechanisms allow models to pay more attention to specific parts of the code or input that are more likely to contain vulnerability-related patterns. This ability to localize relevant information helps identify and understand the factors contributing to vulnerabilities more effectively. CNNs are used in 6 studies. While not as prevalent as recurrent or graph models, CNNs are still considered effective for capturing local patterns and features in vulnerability detection tasks. General models like DBN, Auto Encoders, Memory Neural Networks, GAN, and Para2Vec are also used to a lesser extent, indicating the exploration of diverse deep learning techniques in vulnerability detection. Transformers are the least frequent family of DL models used in primary studies. This is because they have been recently introduced for software vulnerability detection. Transformers are effective in this domain since they generate contextualized representations for each token in the input sequence. By considering the surrounding tokens and their interactions, transformers capture rich contextual information, which is crucial for understanding vulnerabilities that depend on the overall context of the code or vulnerability-related text.
+
+Table \ref{tbl:ML_dist} shows the distribution of ML models used in primary studies. As shown in the figure, Random Forest is the most frequently used ML model, appearing in 7 studies. SVM, Naive Bayes, and Logistic Regression are popular choices, with 6, 5, and 4 occurrences, respectively. N-Gram models are used in 1 study, indicating their application in capturing sequential patterns and language-based features in vulnerability detection. N-Gram models are commonly used for text analysis and have been adapted for code analysis tasks. Distance measures are utilized in 2 studies for vulnerability detection. These metrics help quantify the similarity or dissimilarity between code elements or features, enabling the identification of potentially vulnerable code segments based on their proximity to known vulnerabilities.
+
+
+\input{Tables/table8}
+\input{Tables/table9}
+
+
+
+\mybox{Answer to RQ3}{red!40}{gray!10}{
+(1) 79.1\% of primary studies use DL models for vulnerability detection while merely 16.4\% of the primary studies use classic ML models.\\
+
+(2) RNNs and GNNs are by far the most popular DL-based models in software vulnerability detection accounting for 28\% and 22\% of primary studies.\\
+%\song{what do you mean DNNs?} 
+%\nima{I consider DNN as a general term for all neural networks that are deep.}
+
+(3) LSTM is the most popular architecture in RNN-based models.
+% , while GRU \jie{from table 9, GRU is not the least. Also i feel quite puzzled why GRU is the least type since it is already demonstrate to be effective in other field.} is the least popular RNN for software vulnerability detection in the recurrent models family.\\
+
+(4) Graph-based models are the second most popular models used in software security vulnerability detection accounting for 15 studies. In this family, GGNN is the most popular architecture.
+% and GGRN is the least one.\jie{I think we only need to list the most popular one, donot need to list the least one.} \\
+
+(5) Besides DL models, ML models are popular for software vulnerability detection. Random Forest is the most popular model accounting for 7 studies. 
+}

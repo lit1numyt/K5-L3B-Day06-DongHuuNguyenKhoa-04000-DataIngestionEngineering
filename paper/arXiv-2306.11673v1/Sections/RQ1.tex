@@ -1,0 +1,51 @@
+\section{Results}
+
+%\song{Update all papers including all papers in 2022} \nima{done}
+
+We present our analyses and findings in this section to address the research questions we devised in Section~\ref{sec:intro}. 
+
+\subsection{RQ1. What is the trend of studies using ML/DL models for vulnerability detection?}
+
+To comprehend the trend of publications, we examined the publication dates along with the venues in which they were presented.
+
+\subsubsection{RQ1.1. What are the trends of studies in software vulnerability detection over time?}
+%In this paper, we analyzed studies published between 2011 and 2022 to characterize the trend of studies for software vulnerability detection. 
+Figure~\ref{fig:pub_trends} %\jie{this figure is far away from here, a little hard to find it.} \nima{done} \song{please fix the same issue globally, should always keep the table/fig close to their first reference} \nima{I will fix this issue at the end when I finished adding contents, because if I add or remove contents, the order may be changed again.} 
+demonstrates the publication trend of vulnerability detection studies published in eleven years, i.e., between 2011 and 2022. It is observable that the number of publications has increased gradually over the years. There is only one publication from 2011 to 2016, and the number of publications increased to 18 in 2021. However, there is a decrease in the number of publications in 2022 compared to the previous year. We have also examined the cumulative number of publications shown in Figure \ref{fig:pub_trends}. It is noticeable that the curve fitting the distribution shows a significant increase in slope between 2018 and 2022 %, indicating that there is a substantial increase in the number of relevant studies using DL for vulnerability detection in the future. 
+suggesting that the use of ML/DL techniques for software vulnerability detection has become a prevalent trend since 2017, and a broad range of studies have utilized ML/DL models to address challenges in this field.
+
+
+\input{Figures/sources/fig2}
+\input{Tables/table2}
+\input{Tables/table3}
+
+% \song{Table 2 and 3 are not mentioned in part of your paper, please do read want you write!!!!} \nima{done}
+
+
+
+
+\subsubsection{RQ1.2: What is the distribution of the publication venues?}
+In this study, overall, we analyzed and reviewed 67 papers from various publication venues including 43 conference and symposium papers along with 24 journal papers. We have included the conference and journal acronyms and their complete names for reference in Table \ref{tbl:confLegend} and Table \ref{tbl:jourLegend}. Table \ref{tbl:venueDist}
+% \song{too far, move it here; do not skip table ids, there are table 2 and 3 in between} \nima{done} 
+shows the distribution of primary studies for each publication venue. 64.1\% of publications are published in conferences and symposiums while 35.8\% of papers have been published as journal papers. It is observable that MSR, IJCAI, and ECSE/FSE are the most popular venues that have the highest number of primary studies, each of which contains 4 papers. %It is worth mentioning that IJCAI which is not a SE venue has more vulnerability detection papers than top SE venues including ICSE, ASE, and ECSE/FSE. 
+Meanwhile, among the journals, TDSC and TSE include the highest number of studies, i.e., 6 and 4 studies respectively.
+
+\mybox{Answer to RQ1}{red!40}{gray!10}{
+(1) The results indicate that the application of ML/DL techniques for software vulnerability detection has had a remarkable rising trend in the past few years.\\
+(2) A large proportion of papers are published in recent two years, i.e., 2021 and 2022.\\
+% (3) The number of conference papers that addressed the problem of software vulnerability detection is larger than the number of corresponding journal papers. \jie{In my opinion, this comparison might not fair since you search 25 conferences, and only 12 journals. for example you include the ASE conference, yet not include the ASE journal. I think it might be better to remove this point in the summary.}\\
+(3) MSR, IJCAI, and ECSE/FSE are the most popular conference venues. On the other hand, TDSC and TSE are the most popular journal venues.\\
+}
+
+\input{Tables/table4}
+
+% \begin{figure}[H]
+%     \centering
+%      {\includegraphics{Figures/distribution_conf.png}}
+%      \caption{Number of publications per year}
+%     \label{pub_per_year}
+% \end{figure}
+
+\input{Figures/sources/fig3}
+
+
