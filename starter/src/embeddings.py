@@ -1,5 +1,7 @@
-"""Choose a real embedding provider (API or local) and implement this contract."""
+"""EmbeddingGemma 2 adapter for local document/query embeddings."""
 from typing import Protocol
+
+from sentence_transformers import SentenceTransformer
 
 
 class Embedder(Protocol):
@@ -16,14 +18,35 @@ class Embedder(Protocol):
 
 
 class MyEmbedder:
-    """TODO: implement a provider adapter; do not silently fall back to mock vectors."""
+    """Use a real Sentence Transformers model with task-specific prompts."""
 
-    def __init__(self, model_name: str) -> None:
+    def __init__(self, model_name: str, truncate_dim: int | None = None) -> None:
         self.model_name = model_name
-        raise NotImplementedError("TODO: initialize real embedder and dimensions")
+        self.truncate_dim = truncate_dim
+        self.model = SentenceTransformer(
+            model_name,
+            config_kwargs={"vision_config": None, "audio_config": None},
+        )
+        native_dimensions = self.model.get_embedding_dimension()
+        self.dimensions = truncate_dim or native_dimensions
+        if self.dimensions not in {128, 256, 512, 768}:
+            raise ValueError(f"Unsupported embedding dimension: {self.dimensions}")
+
+    def _encode(self, texts: list[str], prompt_name: str) -> list[list[float]]:
+        if not texts:
+            return []
+        vectors = self.model.encode(
+            texts,
+            prompt_name=prompt_name,
+            normalize_embeddings=True,
+            truncate_dim=self.truncate_dim,
+            convert_to_numpy=True,
+            show_progress_bar=False,
+        )
+        return vectors.tolist()
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
-        raise NotImplementedError("TODO: embed_documents")
+        return self._encode(texts, "Document")
 
     def embed_query(self, question: str) -> list[float]:
-        raise NotImplementedError("TODO: embed_query")
+        return self._encode([question], "QuestionAnswering")[0]

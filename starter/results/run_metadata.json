@@ -1,0 +1,49 @@
+{
+  "model": "google/embeddinggemma-2",
+  "dimensions": 768,
+  "vector_store": "PostgreSQL + pgvector",
+  "metric": "cosine similarity",
+  "strategies": {
+    "A": {
+      "chunking": "fixed_size",
+      "size": 700,
+      "overlap": 100
+    },
+    "B": {
+      "chunking": "by_paragraph",
+      "max_size": 1000
+    },
+    "C": {
+      "chunking": "by_paragraph",
+      "max_size": 1000,
+      "filter": "section when supplied"
+    }
+  },
+  "question_count": 20,
+  "eligible_page_count": 30,
+  "total_seconds": 34.512,
+  "strategy_stats": {
+    "A": {
+      "chunk_count": 184,
+      "chunk_length_min": 105,
+      "chunk_length_max": 700,
+      "chunk_length_mean": 658.05,
+      "ingest_seconds": 15.407
+    },
+    "B": {
+      "chunk_count": 121,
+      "chunk_length_min": 80,
+      "chunk_length_max": 1000,
+      "chunk_length_mean": 873.52,
+      "ingest_seconds": 14.237
+    },
+    "C": {
+      "chunk_count": 121,
+      "chunk_length_min": 80,
+      "chunk_length_max": 1000,
+      "chunk_length_mean": 873.52,
+      "ingest_seconds": 0.074,
+      "embedding_reused_from": "B"
+    }
+  }
+}
