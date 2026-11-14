@@ -4,28 +4,19 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
-import unicodedata
 from datetime import date
 from pathlib import Path
 
 from pypdf import PdfReader
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from src.ingestion import clean_page_artifacts, normalize_text
+
 
 DOCUMENT_ID = "automated-software-vulnerability-detection-survey-v1"
 TITLE = "A Survey on Automated Software Vulnerability Detection Using Machine Learning and Deep Learning"
-
-
-def normalize_text(text: str) -> str:
-    """Normalize Unicode/whitespace while preserving paragraph boundaries."""
-    text = unicodedata.normalize("NFKC", text).replace("\u00ad", "")
-    paragraphs = []
-    for paragraph in re.split(r"\n\s*\n+", text):
-        paragraph = re.sub(r"[ \t]+", " ", paragraph)
-        paragraph = re.sub(r" *\n+ *", " ", paragraph).strip()
-        if paragraph:
-            paragraphs.append(paragraph)
-    return "\n\n".join(paragraphs)
 
 
 def section_for_page(page: int) -> str:
@@ -61,7 +52,7 @@ def build_index(pdf_path: Path, index_path: Path, manifest_path: Path) -> None:
 
     for page_number, page in enumerate(reader.pages, start=1):
         raw_text = page.extract_text() or ""
-        normalized = normalize_text(raw_text)
+        normalized = normalize_text(clean_page_artifacts(raw_text, page_number))
         eligible = page_number <= 30 and bool(normalized)
         if eligible:
             content_pages += 1

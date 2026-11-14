@@ -48,5 +48,5 @@ class MyEmbedder:
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
         return self._encode(texts, "Document")
 
-    def embed_query(self, question: str) -> list[float]:
-        return self._encode([question], "QuestionAnswering")[0]
+    def embed_query(self, question: str, prompt_name: str = "QuestionAnswering") -> list[float]:
+        return self._encode([question], prompt_name)[0]

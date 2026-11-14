@@ -71,6 +71,18 @@ def by_paragraph(page: DocumentPage, max_size: int) -> list[Chunk]:
     if current:
         grouped.append(current)
 
+    merged: list[str] = []
+    for text in grouped:
+        if (
+            merged
+            and len(text) < 100
+            and len(merged[-1]) + 2 + len(text) <= max_size
+        ):
+            merged[-1] = f"{merged[-1]}\n\n{text}"
+        else:
+            merged.append(text)
+    grouped = merged
+
     chunks: list[Chunk] = []
     for index, text in enumerate(grouped):
         metadata = dict(page.metadata)

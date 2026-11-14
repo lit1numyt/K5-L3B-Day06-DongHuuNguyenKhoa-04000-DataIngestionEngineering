@@ -70,6 +70,7 @@ def main() -> None:
     parser.add_argument("--fixed-size", type=int, default=700)
     parser.add_argument("--fixed-overlap", type=int, default=100)
     parser.add_argument("--paragraph-size", type=int, default=1000)
+    parser.add_argument("--query-prompt", choices=["QuestionAnswering", "SearchQuery"], default="QuestionAnswering")
     args = parser.parse_args()
 
     load_dotenv(Path(__file__).resolve().parents[1] / ".env")
@@ -96,7 +97,10 @@ def main() -> None:
 
     strategy_stats: dict[str, dict] = {}
     all_traces: list[dict] = []
-    query_vectors = {q["id"]: embedder.embed_query(q["question"]) for q in questions}
+    query_vectors = {
+        q["id"]: embedder.embed_query(q["question"], prompt_name=args.query_prompt)
+        for q in questions
+    }
     vectors_by_strategy: dict[str, list[list[float]]] = {}
 
     for strategy, chunks in strategy_chunks.items():
@@ -138,6 +142,7 @@ def main() -> None:
                 "dimensions": embedder.dimensions,
                 "vector_store": "PostgreSQL + pgvector",
                 "metric": "cosine similarity",
+                "query_prompt": args.query_prompt,
                 "strategies": {
                     "A": {"chunking": "fixed_size", "size": args.fixed_size, "overlap": args.fixed_overlap},
                     "B": {"chunking": "by_paragraph", "max_size": args.paragraph_size},

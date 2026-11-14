@@ -1,0 +1,68 @@
+{
+  "A": {
+    "dev": {
+      "count": 15,
+      "hit_at_1": 6,
+      "evidence_hit_at_3": 8,
+      "filter_queries": 3,
+      "filter_compliant_top3": 0,
+      "hit_at_1_fraction": "6/15",
+      "evidence_hit_at_3_fraction": "8/15",
+      "filter_compliance_fraction": "0/3"
+    },
+    "test": {
+      "count": 5,
+      "hit_at_1": 0,
+      "evidence_hit_at_3": 2,
+      "filter_queries": 4,
+      "filter_compliant_top3": 1,
+      "hit_at_1_fraction": "0/5",
+      "evidence_hit_at_3_fraction": "2/5",
+      "filter_compliance_fraction": "1/4"
+    }
+  },
+  "B": {
+    "dev": {
+      "count": 15,
+      "hit_at_1": 7,
+      "evidence_hit_at_3": 11,
+      "filter_queries": 3,
+      "filter_compliant_top3": 0,
+      "hit_at_1_fraction": "7/15",
+      "evidence_hit_at_3_fraction": "11/15",
+      "filter_compliance_fraction": "0/3"
+    },
+    "test": {
+      "count": 5,
+      "hit_at_1": 1,
+      "evidence_hit_at_3": 4,
+      "filter_queries": 4,
+      "filter_compliant_top3": 2,
+      "hit_at_1_fraction": "1/5",
+      "evidence_hit_at_3_fraction": "4/5",
+      "filter_compliance_fraction": "2/4"
+    }
+  },
+  "C": {
+    "dev": {
+      "count": 15,
+      "hit_at_1": 5,
+      "evidence_hit_at_3": 9,
+      "filter_queries": 3,
+      "filter_compliant_top3": 3,
+      "hit_at_1_fraction": "5/15",
+      "evidence_hit_at_3_fraction": "9/15",
+      "filter_compliance_fraction": "3/3"
+    },
+    "test": {
+      "count": 5,
+      "hit_at_1": 2,
+      "evidence_hit_at_3": 4,
+      "filter_queries": 4,
+      "filter_compliant_top3": 4,
+      "hit_at_1_fraction": "2/5",
+      "evidence_hit_at_3_fraction": "4/5",
+      "filter_compliance_fraction": "4/4"
+    }
+  }
+}
