@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 from pathlib import Path
 
 
@@ -48,7 +49,10 @@ def grounding_reason(question_id: str, strategy: str, score: int) -> str:
 
 
 def main() -> None:
-    path = Path(__file__).resolve().parents[1] / "results" / "manual_audit.csv"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--audit-path", type=Path, default=None)
+    args = parser.parse_args()
+    path = args.audit_path or (Path(__file__).resolve().parents[1] / "results" / "manual_audit.csv")
     with path.open(encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream))
 
@@ -79,7 +83,7 @@ def main() -> None:
             row["reason"] = grounding_reason(question_id, strategy, score)
 
     with path.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=fieldnames)
+        writer = csv.DictWriter(stream, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     print(f"Filled {len(rows)} audit rows in {path}")

@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import sys
+import argparse
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -31,14 +32,21 @@ def load_pages(path: Path) -> list[DocumentPage]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--source-results", type=Path, default=None)
+    parser.add_argument("--output", type=Path, default=None)
+    args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     repo = root.parent
+    source_results = args.source_results or (root / "results")
+    output = args.output or (root / "results" / "manual_audit.csv")
     pages = load_pages(repo / "data" / "paper_pages.jsonl")
-    run_metadata = json.loads((root / "results" / "run_metadata.json").read_text())
+    run_metadata = json.loads((source_results / "run_metadata.json").read_text())
+    run_source = str(source_results.relative_to(root)) if source_results.is_relative_to(root) else str(source_results)
     traces = {
         strategy: [
             json.loads(line)
-            for line in (root / "results" / f"traces_{strategy}.jsonl").read_text().splitlines()
+            for line in (source_results / f"traces_{strategy}.jsonl").read_text().splitlines()
         ]
         for strategy in ("A", "B", "C")
     }
@@ -89,6 +97,7 @@ def main() -> None:
                     "filter_compliant": "",
                     "label": "",
                     "reason": "",
+                    "run_source": run_source,
                 }
             )
 
@@ -117,6 +126,7 @@ def main() -> None:
                         "filter_compliant": trace["filter_compliant_top3"],
                         "label": "",
                         "reason": "Check source, page, section, and filter correctness against the paper.",
+                        "run_source": run_source,
                     }
                 )
             rows.append(
@@ -145,12 +155,12 @@ def main() -> None:
                     "filter_compliant": trace["filter_compliant_top3"],
                     "label": "",
                     "reason": "Score 0=no evidence, 1=partial evidence, 2=sufficient evidence and provenance.",
+                    "run_source": run_source,
                 }
             )
 
-    output = root / "results" / "manual_audit.csv"
     with output.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     print(f"Wrote {len(rows)} blank audit rows to {output}")
