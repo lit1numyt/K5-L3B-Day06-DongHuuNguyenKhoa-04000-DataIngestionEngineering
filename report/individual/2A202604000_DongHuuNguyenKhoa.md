@@ -14,6 +14,7 @@
 - C: giống B về corpus, model, chunking và metadata; chỉ thêm filter `section` khi câu hỏi có filter. Vì vậy B–C thay đúng yếu tố filter.
 - Benchmark có 20 câu hỏi được chốt trước khi chạy, gồm 15 dev và 5 test. Có 7 câu filter: 3 dev và 4 test. Mỗi câu có expected answer, gold page và evidence quote; evidence được kiểm tra tồn tại trong text đã chuẩn hóa. Bộ câu hỏi nằm tại [benchmark/questions.json](../../benchmark/questions.json).
 - Tiêu chí chọn chiến lược được chốt trước khi xem test: ưu tiên Evidence Hit@3 trên dev, sau đó xem filter compliance và chi phí/thời gian. Theo tiêu chí này, B được chọn làm cấu hình mặc định vì đạt 12/15 Evidence Hit@3 trên dev. Test chỉ được dùng để báo cáo sau khi lựa chọn đã cố định.
+- Additional improvement run: tôi thử lexical reranking trên top-20 và top-100 dense candidates với các trọng số 0.10, 0.20, 0.30 và 0.40. Kết quả tốt nhất của B chỉ đạt 11/15 Evidence Hit@3 trên dev, thấp hơn baseline 12/15, nên reranking không được chọn làm cấu hình cuối. Các runs được lưu trong `starter/results/tune_lex_*` và `starter/results/tune_lex_k100_*`; có thể bật bằng `--rerank lexical`.
 
 ## Kết quả
 
@@ -46,3 +47,4 @@ Trace top-3: [traces_A.jsonl](../../starter/results/traces_A.jsonl), [traces_B.j
 - Chiến lược chọn: B là mặc định khi ưu tiên evidence retrieval trên câu hỏi tổng quát. C phù hợp khi người dùng cung cấp section filter đáng tin và mục tiêu chính là tuân thủ phạm vi. A đơn giản hơn và có overlap, nhưng chunk dễ cắt ý hơn.
 - Hạn chế: test chỉ có 5 câu, corpus chỉ gồm một bài survey, manual audit do tác giả thực hiện, và thời gian đo phụ thuộc máy/model cache. Các kết quả không chứng minh chiến lược tốt nhất cho corpus khác. Bộ PDF/TeX cũng cần kiểm tra quyền trước khi chia sẻ công khai.
 - Nếu làm lại: giữ B làm baseline, bổ sung hybrid dense + lexical reranking trên dev, xử lý bảng/tiêu đề theo section rõ hơn, và tạo test holdout mới trước khi tinh chỉnh tiếp. Có thể đánh giá thêm retrieval đa chunk cho các câu yêu cầu kết hợp nhiều bảng hoặc đoạn.
+- Sau lần thử reranking bổ sung, hướng ưu tiên tiếp theo là xử lý cấu trúc bảng/tiêu đề và retrieval đa chunk, thay vì tăng trọng số lexical trên cùng các chunk hiện tại.

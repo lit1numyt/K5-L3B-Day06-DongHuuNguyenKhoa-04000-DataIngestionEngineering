@@ -14,6 +14,7 @@ from .chunking import by_paragraph, fixed_size
 from .embeddings import MyEmbedder
 from .evaluation import evaluate_query, summarize
 from .models import DocumentPage
+from .reranking import rerank
 from .store import PgVectorStore
 
 
@@ -71,6 +72,9 @@ def main() -> None:
     parser.add_argument("--fixed-overlap", type=int, default=100)
     parser.add_argument("--paragraph-size", type=int, default=1000)
     parser.add_argument("--query-prompt", choices=["QuestionAnswering", "SearchQuery"], default="QuestionAnswering")
+    parser.add_argument("--rerank", choices=["none", "lexical"], default="none")
+    parser.add_argument("--lexical-weight", type=float, default=0.2)
+    parser.add_argument("--candidate-k", type=int, default=20)
     args = parser.parse_args()
 
     load_dotenv(Path(__file__).resolve().parents[1] / ".env")
@@ -78,6 +82,8 @@ def main() -> None:
     model_name = args.model or os.environ.get("EMBEDDING_MODEL", "google/embeddinggemma-2")
     if not database_url:
         raise RuntimeError("DATABASE_URL is required")
+    if args.candidate_k < 3:
+        raise ValueError("candidate-k must be at least 3")
 
     pages = _load_pages(args.pages)
     questions = _load_questions(args.benchmark)
@@ -123,7 +129,11 @@ def main() -> None:
         traces: list[dict] = []
         for question in questions:
             filters = question.get("filter") if strategy == "C" else None
-            hits = store.search(strategy, query_vectors[question["id"]], top_k=3, filters=filters)
+            candidate_k = max(3, args.candidate_k if args.rerank == "lexical" else 3)
+            hits = store.search(strategy, query_vectors[question["id"]], top_k=candidate_k, filters=filters)
+            if args.rerank == "lexical":
+                hits = rerank(question["question"], hits, args.lexical_weight)
+            hits = hits[:3]
             trace = evaluate_query(question, hits)
             trace["strategy"] = strategy
             traces.append(trace)
@@ -143,6 +153,9 @@ def main() -> None:
                 "vector_store": "PostgreSQL + pgvector",
                 "metric": "cosine similarity",
                 "query_prompt": args.query_prompt,
+                "rerank": args.rerank,
+                "lexical_weight": args.lexical_weight if args.rerank == "lexical" else None,
+                "candidate_k": args.candidate_k if args.rerank == "lexical" else 3,
                 "strategies": {
                     "A": {"chunking": "fixed_size", "size": args.fixed_size, "overlap": args.fixed_overlap},
                     "B": {"chunking": "by_paragraph", "max_size": args.paragraph_size},
