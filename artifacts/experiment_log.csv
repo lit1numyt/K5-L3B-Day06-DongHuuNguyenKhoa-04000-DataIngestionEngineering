@@ -1,4 +1,4 @@
 strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+A,fixed_size,700,100,"document_id,source,page,section",none,"google/embeddinggemma-2; 768d","Fixed windows provide overlap and should preserve evidence across boundaries.",6,8,0,2,"PostgreSQL + pgvector; cosine; ingest 12.377s; Evidence Hit@3; 0 paid API cost."
+B,by_paragraph,1000,0,"document_id,source,page,section",none,"google/embeddinggemma-2; 768d","Paragraph boundaries should improve chunk coherence and evidence retrieval over fixed windows.",5,12,1,2,"PostgreSQL + pgvector; cosine; ingest 14.080s; Evidence Hit@3; 0 paid API cost."
+C,by_paragraph,1000,0,"document_id,source,page,section","section when supplied","google/embeddinggemma-2; 768d","Filtering by verified section metadata should improve scope compliance for constrained questions.",3,10,2,2,"Reused B embeddings; index 0.068s; filter compliance dev 3/3 and test 4/4; 0 paid API cost."
